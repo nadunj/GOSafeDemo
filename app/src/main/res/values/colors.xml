@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#049704</color>
+    <color name="colorPrimaryDark">#038303</color>
+    <color name="colorAccent">#8ac348</color>
+    <color name="sheetColor">#FFF</color>
+    <color name="fabColor">#000</color>
+    <color name="speedPointColor">#d79c13</color>
+    <color name="criticalLocationColor">#c21e10</color>
+    <color name="windowBackground">#fff</color>
+    <color name="mainMenuBackground">#eceff0</color>
+    <color name="alternativeRouteColor">#FF7C7A7B</color>
+    <color name="mainBackground">#ebeff0</color>
+</resources>
