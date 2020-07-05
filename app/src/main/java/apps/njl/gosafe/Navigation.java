@@ -1,21 +1,25 @@
 package apps.njl.gosafe;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.directions.route.AbstractRouting;
@@ -52,13 +56,14 @@ import REST_Controller.RESTClient;
 import REST_Controller.RESTInterface;
 import REST_Controller.RouteRequest;
 import REST_Controller.StaticIncidentData;
+import apps.njl.gosafe.services.MyLocationService;
 import plugins.gligerglg.locusservice.LocusService;
 
 public class Navigation extends AppCompatActivity implements OnMapReadyCallback, RoutingListener {
 
+    private final int LOCATION_REQUEST_CODE = 1000;
     private GoogleMap mMap;
     private LatLng myPosition = null, destination = null;
-    private LocusService locusService;
     private MaterialDialog dialog;
     private double myLocLat, myLocLon, desLat, desLon;
     private boolean isReroute = false;
@@ -89,6 +94,8 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
     private boolean isBlackspotEnabled, isCriticalEnabled, isTrafficEnabled, isSpeedLimitEnabled;
     private SharedPreferences sharedPref;
 
+    private MyLocationService myLocationService;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,64 +109,16 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         Init();
         token = getIntent().getStringExtra("token");
 
-        locusService.setRealTimeLocationListener(new LocusService.RealtimeListenerService() {
-            @Override
-            public void OnRealLocationChanged(Location location) {
-                if (location != null) {
-                    mMap.clear();
-                    dialog.dismiss();
-                    myPosition = new LatLng(location.getLatitude(), location.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(myPosition).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.home_pin)));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14.0f));
-                    locusService.stopRealTimeGPSListening();
-                    if (destination != null) {
-                        setProgressDialog("Fetching Route Data");
-                        route();
-                    }
-                }
-            }
-        });
-
         btn_gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (myPosition == null) {
-                    if (locusService.isGPSProviderEnabled()) {
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        locusService.startRealtimeGPSListening(1000);
-                        setProgressDialog("Calculating GPS Location");
-                    } else
-                        locusService.openSettingsWindow("iSafe needs to enable GPS service to acquire precise location data\n" +
-                                "Do you need to enable GPS manually?");
+                if (ActivityCompat.checkSelfPermission(Navigation.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                        && ActivityCompat.checkSelfPermission(Navigation.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Navigation.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                            LOCATION_REQUEST_CODE);
                 } else {
-                    if (myPosition != null && destination != null && selected_path != null) {
-                        setProgressDialog("Fetching Incident Data");
-                        showStaticIncidentData();
-                    } else if (myPosition != null && destination == null)
-                        setMessage("Set a Destination");
+                    initLocationService();
                 }
-
-
-
-                /*String dataset = "";
-                File sdcard = getApplicationContext().getExternalFilesDir(null);
-                File file = new File(sdcard, "matara.txt");
-                if(mataraList!=null)
-                {
-                    for(LatLng point : mataraList)
-                        dataset += "\nlatLngList.add(new LatLng(" + point.latitude + "," + point.longitude + "));";
-                    try {
-                        MapController.writeToFile(dataset,file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        setMessage("Failed");
-                    }
-                    Toast.makeText(getApplicationContext(),dataset,Toast.LENGTH_LONG).show();
-                    setMessage("OK");
-
-                }*/
             }
         });
 
@@ -196,6 +155,14 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         if (dialog != null) {
             dialog.dismiss();
             dialog = null;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == LOCATION_REQUEST_CODE && grantResults.length > 0
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            initLocationService();
         }
     }
 
@@ -326,8 +293,25 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         snackbar.show();
     }
 
-    private void Init() {
+    private void initLocationService(){
+        setProgressDialog("Calculating GPS Location");
+        myLocationService = new MyLocationService(Navigation.this, new MyLocationService.LocationUpdate() {
+            @Override
+            public void onLocationFetched(Location location) {
+                mMap.clear();
+                dialog.dismiss();
+                myPosition = new LatLng(location.getLatitude(), location.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(myPosition).title("My Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.home_pin)));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myPosition, 14.0f));
+                if (destination != null) {
+                    setProgressDialog("Fetching Route Data");
+                    route();
+                }
+            }
+        });
+    }
 
+    private void Init() {
         sharedPref = getSharedPreferences("iSafe_settings", 0);
         isReroute = getIntent().getBooleanExtra("isReroute", false);
         database = FirebaseDatabase.getInstance();
@@ -343,7 +327,6 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
             destination = new LatLng(desLat, desLon);
         }
 
-        locusService = new LocusService(this, false);
         layout = findViewById(R.id.main_coordinatorLayout);
         btn_gps = findViewById(R.id.main_fab_gps);
 

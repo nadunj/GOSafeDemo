@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/incident_layout"
@@ -12,7 +12,7 @@
     android:background="#fff"
     app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_landslip"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.v7.widget.AppCompatImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -55,9 +55,9 @@
                 android:text="Landslip" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_flood"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -99,9 +99,9 @@
                 android:text="Flood" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_closer"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -143,9 +143,9 @@
                 android:text="Closure" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_hazards"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -190,9 +190,9 @@
                 android:text="Hazards" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_traffic"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -236,9 +236,9 @@
                 android:text="Traffic Jam" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/btn_incident_accident"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
@@ -283,7 +283,7 @@
                 android:text="Accident" />
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView"
@@ -300,4 +300,4 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />   /
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

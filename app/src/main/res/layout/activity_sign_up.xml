@@ -35,7 +35,7 @@
 
                 />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILusername"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -48,9 +48,9 @@
                     android:hint="Username"
                     android:inputType="text"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILfirstname"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -64,9 +64,9 @@
                     android:hint="First Name"
                     android:inputType="text"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILlastname"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -80,9 +80,9 @@
                     android:hint="Last Name"
                     android:inputType="text"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILnic"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -96,9 +96,9 @@
                     android:hint="National Identity Card No"
                     android:inputType="text"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILdob"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -112,9 +112,9 @@
                     android:hint="Date of Birth (YYYY-MM-DD)"
                     android:inputType="date"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILresidence"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -127,9 +127,9 @@
                     android:hint="Residence"
                     android:inputType="textImeMultiLine"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILpwd"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -145,7 +145,7 @@
                     android:hint="Password"
                     android:inputType="textPassword"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textView4"
@@ -160,7 +160,7 @@
                 android:layout_marginTop="20dp"
                 />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILtelephoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -174,9 +174,9 @@
                     android:hint="Telephone Number"
                     android:inputType="phone"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILemail"
                 android:layout_width="match_parent"
                 android:layout_height="75dp">
@@ -188,7 +188,7 @@
                     android:hint="Email"
                     android:inputType="textEmailAddress"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
             <TextView
@@ -203,7 +203,7 @@
                 android:layout_marginTop="20dp"
                 />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILlicenseNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -216,9 +216,9 @@
                     android:hint="License Number"
                     android:inputType="text"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILdateofissue"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -232,9 +232,9 @@
                     android:inputType="datetime"
                     android:textColorHint="@color/colorPrimary" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILdateofexpire"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
@@ -248,7 +248,7 @@
                     android:hint="Date of Expire (YYYY-MM-DD)"
                     android:inputType="date"
                     android:textColorHint="@color/colorPrimary" />
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
