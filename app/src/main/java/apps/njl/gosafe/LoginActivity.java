@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
         usernametxt = findViewById(R.id.UsernameTxt);
         signuptxt = findViewById(R.id.txtsignup);
         layout = findViewById(R.id.layout_login);
-        guest = findViewById(R.id.btn_guest);
 
         sharedPreferences = getSharedPreferences("iSafe_settings",0);
         editor = sharedPreferences.edit();
