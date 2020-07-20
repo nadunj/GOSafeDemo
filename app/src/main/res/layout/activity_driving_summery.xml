@@ -161,12 +161,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Achievements (Unconfirmed Data)"
-                    android:textColor="@color/colorPrimaryDark"/>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -178,7 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Score for Incidents Marking"
+                        android:text="Reported Incidents"
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintBaseline_toBaselineOf="@+id/txt_summery_addIncident"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -208,73 +202,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Score for Incidents Removing"
+                        android:text="Removed Incidents"
                         android:textColor="@color/colorPrimaryDark"
                         app:layout_constraintBaseline_toBaselineOf="@+id/txt_summery_removeIncident"
                         app:layout_constraintStart_toStartOf="parent" />
 
                     <TextView
                         android:id="@+id/txt_summery_removeIncident"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="0"
-                        android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Over Speed Score Reduction"
-                        android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/txt_summery_overSpeed"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_summery_overSpeed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginBottom="8dp"
-                        android:text="0"
-                        android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:layout_marginTop="3dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Total Score"
-                        android:textColor="@color/colorPrimaryDark"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/txt_summery_totalScore"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <TextView
-                        android:id="@+id/txt_summery_totalScore"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"

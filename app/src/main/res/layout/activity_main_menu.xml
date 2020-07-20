@@ -28,7 +28,7 @@
         android:background="@color/colorAccent"
         android:fontFamily="@font/magettas"
         android:gravity="center"
-        android:text="iSafe"
+        android:text="GoSafe"
         android:textColor="#fff"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"

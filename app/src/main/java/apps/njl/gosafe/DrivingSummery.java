@@ -89,8 +89,7 @@ public class DrivingSummery extends AppCompatActivity implements OnMapReadyCallb
         txt_averageSpeed = findViewById(R.id.txt_summery_speed);
         txt_scoreAddIncident = findViewById(R.id.txt_summery_addIncident);
         txt_scoreRemoveIncident = findViewById(R.id.txt_summery_removeIncident);
-        txt_scoreOverSpeed = findViewById(R.id.txt_summery_overSpeed);
-        txt_scoreTotal = findViewById(R.id.txt_summery_totalScore);
+
         btnSave = findViewById(R.id.btn_summery_save);
 
         if (summeryInfo.isEndJourney())
