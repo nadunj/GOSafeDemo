@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
         restInterface = RESTClient.getInstance().create(RESTInterface.class);
         layout = findViewById(R.id.layout_profile);
 
-        profilePic = findViewById(R.id.img_profile);
+
         txt_fName = findViewById(R.id.fname);
         txt_nicNumber = findViewById(R.id.inputnic);
         txt_dob = findViewById(R.id.inputdob);

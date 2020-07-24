@@ -41,15 +41,14 @@ public class MainMenu extends AppCompatActivity {
         layout = findViewById(R.id.layout_home);
         btn_navigation = findViewById(R.id.btn_mnu_navigate);
         btn_neabyIncident = findViewById(R.id.btn_mnu_incidents);
-        btn_history = findViewById(R.id.btn_mnu_history);
         btn_profile = findViewById(R.id.btn_mnu_profile);
         btn_settings = findViewById(R.id.btn_mnu_settings);
-        sharedPref = getSharedPreferences("iSafe_settings", 0);
+        sharedPref = getSharedPreferences("GoSafe_settings", 0);
         editor = sharedPref.edit();
 
-        tripDB = Room.databaseBuilder(getApplicationContext(), TripDB.class, "TripDB").fallbackToDestructiveMigration()
-                .allowMainThreadQueries()
-                .build();
+//        tripDB = Room.databaseBuilder(getApplicationContext(), TripDB.class, "TripDB").fallbackToDestructiveMigration()
+//                .allowMainThreadQueries()
+//                .build();
     }
 
     /**Initialize methods**/
@@ -86,7 +85,7 @@ public class MainMenu extends AppCompatActivity {
         });
 
         /**Start driving history activity**/
-        btn_history.setOnClickListener(new View.OnClickListener() {
+      /*  btn_history.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(token!=null) {
@@ -101,7 +100,7 @@ public class MainMenu extends AppCompatActivity {
                 setMessage("Please login to access this service");
             }
             }
-        });
+        }); */
 
         /**start profile activity**/
         btn_profile.setOnClickListener(new View.OnClickListener() {

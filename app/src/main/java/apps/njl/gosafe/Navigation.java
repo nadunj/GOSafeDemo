@@ -312,7 +312,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
     }
 
     private void Init() {
-        sharedPref = getSharedPreferences("iSafe_settings", 0);
+        sharedPref = getSharedPreferences("GoSafe_settings", 0);
         isReroute = getIntent().getBooleanExtra("isReroute", false);
         database = FirebaseDatabase.getInstance();
         myRef = database.getReference().child("RT-Incidents");

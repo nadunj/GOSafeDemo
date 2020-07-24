@@ -75,7 +75,7 @@ public class DriverHistoryAdapter extends RecyclerView.Adapter<DriverHistoryAdap
             txt_speed = itemView.findViewById(R.id.txt_historyfrag_avgspeed);
             txt_earnedScore = itemView.findViewById(R.id.txt_historyfrag_earnedscore);
             txt_reducedScore = itemView.findViewById(R.id.txt_historyfrag_reducedscore);
-            txt_totalScore = itemView.findViewById(R.id.txt_historyfrag_totalscore);
+
             btn_speedMap = itemView.findViewById(R.id.btn_history_map);
         }
     }

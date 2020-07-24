@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         signuptxt = findViewById(R.id.txtsignup);
         layout = findViewById(R.id.layout_login);
 
-        sharedPreferences = getSharedPreferences("iSafe_settings",0);
+        sharedPreferences = getSharedPreferences("GoSafe_settings",0);
         editor = sharedPreferences.edit();
 
         editor.putBoolean("guest",true);

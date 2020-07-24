@@ -32,8 +32,7 @@
         android:textColor="#fff"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottieAnimationView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/img_cloud"
@@ -85,8 +84,7 @@
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/layout_mnu_settings"
-        app:layout_constraintEnd_toStartOf="@+id/layout_mnu_history"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/layout_mnu_navigation"
         app:layout_constraintTop_toBottomOf="@+id/img_cloud">
 
@@ -105,38 +103,6 @@
             android:layout_margin="5dp"
             android:gravity="center"
             android:text="Nearby\nIncidents"
-            android:textColor="@color/colorPrimaryDark" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_mnu_history"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/layout_mnu_settings"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/layout_mnu_incident"
-        app:layout_constraintTop_toBottomOf="@+id/img_cloud">
-
-        <ImageButton
-            android:id="@+id/btn_mnu_history"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            android:src="@mipmap/mnu_history" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:gravity="center"
-            android:text="Driving\nHistory"
             android:textColor="@color/colorPrimaryDark" />
     </LinearLayout>
 
@@ -175,7 +141,6 @@
         android:id="@+id/layout_mnu_settings"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
