@@ -94,7 +94,7 @@ public class NearbyMap extends FragmentActivity implements OnMapReadyCallback {
         locusService = new LocusService(getApplicationContext(), false);
 
         restInterface = RESTClient.getInstance().create(RESTInterface.class);
-        sharedPreferences = getSharedPreferences("iSafe_settings", 0);
+        sharedPreferences = getSharedPreferences("GoSafe_settings", 0);
         radius = sharedPreferences.getInt("radius", 0);
 
     }

@@ -20,15 +20,24 @@
             android:layout_height="wrap_content"
             >
 
-            <fragment
-                android:id="@+id/place_autocomplete_fragment"
-                android:name= "com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+            <EditText
+                android:id="@+id/txtQuery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:hint="Search Place"
+                android:layout_margin="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnSearch"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Search"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -49,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="15dp"
-        android:src="@drawable/icon_gps_location"
+        app:srcCompat="@drawable/icon_gps_location"
         app:backgroundTint="@color/colorPrimaryDark" />
 
 
