@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="progressbar" type="id" />
+    <item name="breg" type="id" />
+    <item name="edit_text_username" type="id" />
+    <item name="edit_text_firstname" type="id" />
+    <item name="edit_text_lastname" type="id" />
+    <item name="edit_text_email" type="id" />
+    <item name="edit_text_pwd" type="id" />
+    <item name="edit_text_residence" type="id" />
+    <item name="button_register" type="id" />
+</resources>

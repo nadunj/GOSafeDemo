@@ -560,8 +560,8 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
 
     private void Init() {
 
-        String dataset = getIntent().getStringExtra("route");
-        sharedPref = getSharedPreferences("iSafe_settings", 0);
+        route = BaseApplication.routeInfo;
+        sharedPref = getSharedPreferences("GOSafe_settings", 0);
         criticalLocationList = new ArrayList<>();
         trafficSignList = new ArrayList<>();
         blackSpotList = new ArrayList<>();
@@ -569,10 +569,6 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
         token = getIntent().getStringExtra("token");
 
         staticVisualizeIncidentList = new ArrayList<>();
-        if (dataset != null) {
-            Gson gson = new Gson();
-            route = gson.fromJson(dataset, RouteInfo.class);
-        }
 
         continuousPath = new ArrayList<>(MapController.generateContinuousPath(route.getPoints()));
         textToSpeech = new TextToSpeech(this, this);

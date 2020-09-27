@@ -31,7 +31,7 @@ public class Intro extends AppIntro {
         setZoomAnimation();
         showSeparator(false);
 
-        sharedPreferences = getSharedPreferences("iSafe_settings", 0);
+        sharedPreferences = getSharedPreferences("GoSafe_settings", 0);
         editor = sharedPreferences.edit();
         editor.putInt("radius", 1000);
         editor.commit();

@@ -83,38 +83,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILnic"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                >
-
-                <EditText
-                    android:id="@+id/nic"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:hint="National Identity Card No"
-                    android:inputType="text"
-                    android:textColorHint="@color/colorPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILdob"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                >
-
-                <EditText
-                    android:id="@+id/dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:hint="Date of Birth (YYYY-MM-DD)"
-                    android:inputType="date"
-                    android:textColorHint="@color/colorPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILresidence"
                 android:layout_width="match_parent"
                 android:layout_height="70dp">
@@ -160,21 +128,7 @@
                 android:layout_marginTop="20dp"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILtelephoneNumber"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                >
-
-                <EditText
-                    android:id="@+id/telephoneNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:hint="Telephone Number"
-                    android:inputType="phone"
-                    android:textColorHint="@color/colorPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
+          .
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/TILemail"
@@ -191,65 +145,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:text="License Information"
-                android:textColor="@color/colorPrimary"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILlicenseNo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-
-                <EditText
-                    android:id="@+id/licenseNo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="License Number"
-                    android:inputType="text"
-                    android:textColorHint="@color/colorPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILdateofissue"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                >
-
-                <EditText
-                    android:id="@+id/dateofissue"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Date Of Issue (YYYY-MM-DD)"
-                    android:inputType="datetime"
-                    android:textColorHint="@color/colorPrimary" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/TILdateofexpire"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                >
-
-                <EditText
-                    android:id="@+id/dateofexpire"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="8dp"
-                    android:hint="Date of Expire (YYYY-MM-DD)"
-                    android:inputType="date"
-                    android:textColorHint="@color/colorPrimary" />
-            </com.google.android.material.textfield.TextInputLayout>
-
+          .
 
         </LinearLayout>
 

@@ -70,31 +70,18 @@ public class ProfileActivity extends AppCompatActivity {
     private void updateUI(ProfileResponse profileResponse){
         Glide.with(this).load(profileResponse.getImageOfDriverUrl()).into(profilePic);
         txt_fName.setText(profileResponse.getUsername());
-        txt_nicNumber.setText(profileResponse.getNic());
-        txt_dob.setText(profileResponse.getDob());
         txt_address.setText(profileResponse.getAddress());
-        txt_tpNumber.setText(profileResponse.getPhonenumber());
         txt_email.setText(profileResponse.getEmail());
-        txt_lic_no.setText(profileResponse.getLicenseNum());
-        txt_issueDate.setText(profileResponse.getDateOfIssueLicense());
-        txt_expData.setText(profileResponse.getDateOfExpireLicense());
+
     }
 
     private void init(){
         token = getIntent().getStringExtra("token");
         restInterface = RESTClient.getInstance().create(RESTInterface.class);
         layout = findViewById(R.id.layout_profile);
-
-
         txt_fName = findViewById(R.id.fname);
-        txt_nicNumber = findViewById(R.id.inputnic);
-        txt_dob = findViewById(R.id.inputdob);
         txt_address = findViewById(R.id.inputresidence);
-        txt_tpNumber = findViewById(R.id.inputtel);
         txt_email = findViewById(R.id.inputemail);
-        txt_lic_no = findViewById(R.id.inputLnum);
-        txt_issueDate = findViewById(R.id.inputissueD);
-        txt_expData = findViewById(R.id.inputexpD);
 
     }
 }

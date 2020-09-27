@@ -29,18 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     int i;
     private Intent intent;
     Button btn_signup;
-    EditText username;
-    EditText firstname;
-    EditText lastname;
-    EditText nic;
-    EditText residence;
-    EditText dob;
-    EditText pwd;
-    EditText telephoneNumber;
-    EditText email;
-    EditText licenseNo;
-    EditText dateofissue;
-    EditText dateofexpire;
+    EditText username, firstname, lastname,  residence, pwd,  email;
     private String token;
     private MaterialDialog dialog;
 
@@ -53,21 +42,14 @@ public class SignUpActivity extends AppCompatActivity {
         firstname = findViewById(R.id.firstname);
         username = findViewById(R.id.username);
         lastname = findViewById(R.id.lastname);
-        nic = findViewById(R.id.nic);
-        dob = findViewById(R.id.dob);
         residence = findViewById(R.id.residence);
         pwd = findViewById(R.id.pwd);
-        telephoneNumber = findViewById(R.id.telephoneNumber);
-
         email = findViewById(R.id.email);
-        licenseNo = findViewById(R.id.licenseNo);
-        dateofissue = findViewById(R.id.dateofissue);
-        dateofexpire = findViewById(R.id.dateofexpire);
+
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
 
         restInterface = RESTClient.getInstance().create(RESTInterface.class);
-
 
         /**fields are nonempty-> upload to sever**/
         btn_signup.setOnClickListener(new View.OnClickListener() {
@@ -76,21 +58,15 @@ public class SignUpActivity extends AppCompatActivity {
                 if(registered)
                     startActivity(intent);
                 else {
-                    if(nonEmpty(username,firstname,lastname,nic,dob,residence,pwd,telephoneNumber,email,licenseNo,dateofissue,dateofexpire)){
+                    if(nonEmpty(username,firstname,lastname,residence,pwd,email)){
                         setProgressDialog("User is registering");
                         UserRegister userRegister = new UserRegister();
                         userRegister.setUsername(username.getText().toString());
                         userRegister.setFirstName(firstname.getText().toString());
                         userRegister.setLastName(lastname.getText().toString());
-                        userRegister.setNic(nic.getText().toString());
                         userRegister.setPassword(pwd.getText().toString());
-                        userRegister.setDob(dob.getText().toString());
-                        userRegister.setLicense_num(licenseNo.getText().toString());
                         userRegister.setAddress(residence.getText().toString());
-                        userRegister.setPhonenumber(Integer.parseInt(telephoneNumber.getText().toString()));
                         userRegister.setEmail(email.getText().toString());
-                        userRegister.setDateOfIssueLicense(dateofissue.getText().toString());
-                        userRegister.setDateOfExpireLicense(dateofexpire.getText().toString());
 
 
                         /*Call<String> call = restInterface.newUserRegister(userRegister);

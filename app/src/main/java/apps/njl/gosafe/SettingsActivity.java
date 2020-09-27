@@ -95,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
         txt_radius = findViewById(R.id.textView11);
         seekBar = findViewById(R.id.seek_radius);
 
-        sharedPreferences = getSharedPreferences("iSafe_settings",0);
+        sharedPreferences = getSharedPreferences("GoSafe_settings",0);
         editor = sharedPreferences.edit();
     }
 

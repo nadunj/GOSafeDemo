@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="registration_success" />
+    <string name="input_error_name" />
+    <string name="input_error_email" />
+    <string name="input_error_email_invalid" />
+    <string name="input_error_password" />
+    <string name="input_error_password_length" />
+</resources>

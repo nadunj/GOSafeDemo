@@ -4,9 +4,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import java.util.List;
 
-/**
- * Created by Gayan Lakshitha on 4/16/2018.
- */
+
 
 public class RouteInfo {
     private LatLng start_point;

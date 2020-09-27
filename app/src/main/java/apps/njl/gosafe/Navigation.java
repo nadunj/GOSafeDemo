@@ -476,9 +476,8 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
 
         //Static Data Class
         String static_data = new Gson().toJson(statics_data);
-        String route_data = new Gson().toJson(routeInfo);
+        BaseApplication.routeInfo = routeInfo;
         intent.putExtra("token", token);
-        intent.putExtra("route", route_data);
         intent.putExtra("staticdata", static_data);
 
         btn_navigate.setOnClickListener(new View.OnClickListener() {
