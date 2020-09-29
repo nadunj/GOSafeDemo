@@ -6,4 +6,7 @@
     <string name="input_error_email_invalid" />
     <string name="input_error_password" />
     <string name="input_error_password_length" />
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="remember_me">Remember Me</string>
 </resources>

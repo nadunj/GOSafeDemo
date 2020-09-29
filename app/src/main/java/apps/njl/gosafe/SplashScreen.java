@@ -29,8 +29,8 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-         // Intent intent = new Intent(SplashScreen.this,LoginActivity.class);
-                    Intent intent = new Intent(SplashScreen.this,MainMenu.class);
+        Intent intent = new Intent(SplashScreen.this,HomeActivity.class);
+                  // Intent intent = new Intent(SplashScreen.this,MainMenu.class);
                     /*if(isFirsttime) {
                         intent = new Intent(SplashScreen.this, Intro.class);
                         editor.putBoolean("intro",false);

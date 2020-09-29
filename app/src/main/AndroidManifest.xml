@@ -73,6 +73,14 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity
+            android:name="apps.njl.gosafe.RegisterActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="apps.njl.gosafe.HomeActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="apps.njl.gosafe.HistorySpeedMap"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
@@ -90,10 +98,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="apps.njl.gosafe.ProfileActivity"
-            android:configChanges="orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="apps.njl.gosafe.SignUpActivity"
             android:configChanges="orientation"
             android:screenOrientation="portrait" />
         <activity android:name="apps.njl.gosafe.ImageUploadActivity"

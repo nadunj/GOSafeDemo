@@ -9,4 +9,8 @@
     <item name="edit_text_pwd" type="id" />
     <item name="edit_text_residence" type="id" />
     <item name="button_register" type="id" />
+    <item name="EmailTxt" type="id" />
+    <item name="emailTxt" type="id" />
+    <item name="btn_register" type="id" />
+    <item name="main_login_btn" type="id" />
 </resources>

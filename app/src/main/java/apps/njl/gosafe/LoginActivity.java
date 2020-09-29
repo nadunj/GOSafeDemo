@@ -1,144 +1,134 @@
 package apps.njl.gosafe;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import com.google.android.material.snackbar.Snackbar;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
+import apps.njl.gosafe.Model.Users;
+
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+import io.paperdb.Paper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import com.afollestad.materialdialogs.MaterialDialog;
+import java.security.AlgorithmParameterGenerator;
 
-import REST_Controller.RESTClient;
-import REST_Controller.RESTInterface;
-
+import apps.njl.gosafe.Model.Users;
 
 public class LoginActivity extends AppCompatActivity {
+    private EditText InputNumber,InputPassword;
+    private Button LoginButton;
+    private ProgressDialog loadingBar;
+    private  String parentDbName="Users";
+    private TextView AdminLink,NotAdminLink;
+    private CheckBox chkBoxRememberMe;
 
-    private EditText usernametxt, passwordtxt;
-    private TextView signuptxt;
-    private Button guest;
-    private RESTInterface restInterface;
-    private MaterialDialog dialog;
-    private ConstraintLayout layout;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-        passwordtxt = findViewById(R.id.PasswordTxt);
-        usernametxt = findViewById(R.id.UsernameTxt);
-        signuptxt = findViewById(R.id.txtsignup);
-        layout = findViewById(R.id.layout_login);
 
-        sharedPreferences = getSharedPreferences("GoSafe_settings",0);
-        editor = sharedPreferences.edit();
-
-        editor.putBoolean("guest",true);
-
-        restInterface = RESTClient.getInstance().create(RESTInterface.class);
+        LoginButton = (Button) findViewById(R.id.login_btn);
+        InputNumber = (EditText) findViewById(R.id.login_phone_num);
+        InputPassword = (EditText) findViewById(R.id.login_password_input);
+        loadingBar= new ProgressDialog(this);
 
 
-        signuptxt.setOnClickListener((new View.OnClickListener() {
+        LoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-            }
-        }));
-
-        guest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),MainMenu.class));
+                loginUser();
             }
         });
 
+
     }
 
-    public void login(View view) {
-        if (nonEmpty(usernametxt, passwordtxt)) {
-            /*startActivity(new Intent(LoginActivity.this, MainMenu.class));*/
-            setProgressDialog("Please Wait Until Verification");
-            requestLogin(usernametxt.getText().toString(), passwordtxt.getText().toString());
+    private void loginUser() {
+        String phone = InputNumber.getText().toString();
+        String password = InputPassword.getText().toString();
+
+        if (TextUtils.isEmpty(phone))
+        {
+            Toast.makeText(this, "Please Enter a phone number..", Toast.LENGTH_SHORT).show();
         }
-
-    }
-
-    /**
-     * Check non-empty fields. if a empty field found --> set an error message
-     */
-    public boolean nonEmpty(EditText... editTexts) {
-        for (EditText editText : editTexts) {
-            if (TextUtils.isEmpty(editText.getText())) {
-                editText.setError("Please Input Required Fields");
-                return false;
-            }
+        else if (TextUtils.isEmpty(password))
+        {
+            Toast.makeText(this, "Please Enter the Password..", Toast.LENGTH_SHORT).show();
         }
-        return true;
+        else
+        {
+            loadingBar.setTitle("Login Account");
+            loadingBar.setMessage("Please wait while we are checking the Credentials");
+            loadingBar.setCanceledOnTouchOutside(false);
+            loadingBar.show();
+
+            AllowAccessToAccount(phone,password);
+
+
+        }
     }
 
-    /**
-     * Request authentication through REST API
-     */
-    private void requestLogin(String username, String password) {
-        /*Call<LoginResponse> call = restInterface.loginUser(new LoginRequest(username, password));
-        call.enqueue(new Callback<LoginResponse>() {
+    private void AllowAccessToAccount(final String phone, final String password) {
+
+
+        final DatabaseReference RootRef;
+        RootRef= FirebaseDatabase.getInstance().getReference();
+
+        RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                if (response.body() != null) {
-                    if (response.code() == 200) {
-                        LoginResponse loginResponse = response.body();
-                        if (!TextUtils.isEmpty(loginResponse.getAccessToken())) {
-                            Intent intent = new Intent(getApplicationContext(),MainMenu.class);
-                            intent.putExtra("token",loginResponse.getAccessToken());
-                            startActivity(intent);
-                        } else {
-                            setMessage("Invalid Username or Password");
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(parentDbName).child(phone).exists())
+                {
+                    Users usersData= dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
+
+                    if(usersData.getPhone().equals(phone))
+                    {
+                        if(usersData.getPassword().equals(password))
+                        {
+                           if (parentDbName.equals("Users"))
+                            {
+                                Toast.makeText(LoginActivity.this, "logged in Successfully..", Toast.LENGTH_SHORT).show();
+                                loadingBar.dismiss();
+
+                                Intent intent = new Intent(LoginActivity.this,MainMenu.class);
+                                startActivity(intent);
+                            }
+
                         }
-
-                    } else {
-                        setMessage("Network Error : " + response.code());
+                        else
+                        {
+                            Toast.makeText(LoginActivity.this, "Invalid Password..", Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
+                        }
                     }
+
                 }
-                dialog.dismiss();
+                else
+                {
+                    Toast.makeText(LoginActivity.this, "Account with this "+ phone +" number do not exist", Toast.LENGTH_SHORT).show();
+                    loadingBar.dismiss();
+
+                }
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                setMessage("Network error! Please check your internet connection");
-                dialog.dismiss();
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
-        });*/
+        });
     }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
-
-    private void setProgressDialog(String message) {
-        dialog = new MaterialDialog.Builder(LoginActivity.this)
-                .content(message)
-                .cancelable(false)
-                .progress(true, 0)
-                .show();
-    }
-
-    private void setMessage(String message) {
-        Snackbar snackbar = Snackbar.make(layout, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
 }
