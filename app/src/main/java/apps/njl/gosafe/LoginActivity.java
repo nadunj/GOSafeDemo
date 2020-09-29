@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,12 +27,12 @@ import java.security.AlgorithmParameterGenerator;
 import apps.njl.gosafe.Model.Users;
 
 public class LoginActivity extends AppCompatActivity {
-    private EditText InputNumber,InputPassword;
+    private EditText InputUsername,InputPassword;
     private Button LoginButton;
     private ProgressDialog loadingBar;
     private  String parentDbName="Users";
-    private TextView AdminLink,NotAdminLink;
-    private CheckBox chkBoxRememberMe;
+
+
 
 
     @Override
@@ -42,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         LoginButton = (Button) findViewById(R.id.login_btn);
-        InputNumber = (EditText) findViewById(R.id.login_phone_num);
+        InputUsername = (EditText) findViewById(R.id.login_username);
         InputPassword = (EditText) findViewById(R.id.login_password_input);
         loadingBar= new ProgressDialog(this);
 
@@ -58,12 +57,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        String phone = InputNumber.getText().toString();
+        String username = InputUsername.getText().toString();
         String password = InputPassword.getText().toString();
 
-        if (TextUtils.isEmpty(phone))
+        if (TextUtils.isEmpty(username))
         {
-            Toast.makeText(this, "Please Enter a phone number..", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please Enter the Username..", Toast.LENGTH_SHORT).show();
         }
         else if (TextUtils.isEmpty(password))
         {
@@ -76,13 +75,13 @@ public class LoginActivity extends AppCompatActivity {
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
 
-            AllowAccessToAccount(phone,password);
+            AllowAccessToAccount(username,password);
 
 
         }
     }
 
-    private void AllowAccessToAccount(final String phone, final String password) {
+    private void AllowAccessToAccount(final String username, final String password) {
 
 
         final DatabaseReference RootRef;
@@ -91,11 +90,11 @@ public class LoginActivity extends AppCompatActivity {
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(parentDbName).child(phone).exists())
+                if(dataSnapshot.child(parentDbName).child(username).exists())
                 {
-                    Users usersData= dataSnapshot.child(parentDbName).child(phone).getValue(Users.class);
+                    Users usersData= dataSnapshot.child(parentDbName).child(username).getValue(Users.class);
 
-                    if(usersData.getPhone().equals(phone))
+                    if(usersData.getUsername().equals(username))
                     {
                         if(usersData.getPassword().equals(password))
                         {
@@ -119,7 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(LoginActivity.this, "Account with this "+ phone +" number do not exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Account with this "+ username +"  do not exist", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
 
                 }

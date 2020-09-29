@@ -13,4 +13,5 @@
     <item name="emailTxt" type="id" />
     <item name="btn_register" type="id" />
     <item name="main_login_btn" type="id" />
+    <item name="login_username" type="id" />
 </resources>

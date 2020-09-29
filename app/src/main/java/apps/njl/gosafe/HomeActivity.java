@@ -56,18 +56,18 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void AllowAccess(final String phone, final String password) {
+    private void AllowAccess(final String username, final String password) {
         final DatabaseReference RootRef;
         RootRef= FirebaseDatabase.getInstance().getReference();
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("Users").child(phone).exists())
+                if(dataSnapshot.child("Users").child(username).exists())
                 {
-                    Users usersData= dataSnapshot.child("Users").child(phone).getValue(Users.class);
+                    Users usersData= dataSnapshot.child("Users").child(username).getValue(Users.class);
 
-                    if(usersData.getPhone().equals(phone))
+                    if(usersData.getPhone().equals(username))
                     {
                         if(usersData.getPassword().equals(password))
                         {
@@ -88,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(HomeActivity.this, "Account with this "+ phone +" number do not exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(HomeActivity.this, "Account with this "+ username+" id do not exist", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
 
                 }

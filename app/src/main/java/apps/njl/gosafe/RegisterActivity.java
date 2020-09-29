@@ -79,21 +79,21 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void ValidatephoneNumber(final String name, final String phone, final String password) {
+    private void ValidatephoneNumber(final String username, final String phone, final String password) {
         final DatabaseReference RootRef;
         RootRef= FirebaseDatabase.getInstance().getReference();
 
         RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(!(dataSnapshot.child("Users").child(phone).exists()))
+                if(!(dataSnapshot.child("Users").child(username).exists()))
                 {
                     HashMap<String,Object> userdataMap= new HashMap<>();
                     userdataMap.put("phone",phone);
                     userdataMap.put("password",password);
-                    userdataMap.put("name",name);
+                    userdataMap.put("username",username);
 
-                    RootRef.child("Users").child(phone).updateChildren(userdataMap)
+                    RootRef.child("Users").child(username).updateChildren(userdataMap)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task)
@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(RegisterActivity.this, "This "+phone+" number already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "This "+username+" id already exists", Toast.LENGTH_SHORT).show();
                     loadingBar.dismiss();
                     Toast.makeText(RegisterActivity.this, "Please try again with another Phone Number", Toast.LENGTH_SHORT).show();
 
