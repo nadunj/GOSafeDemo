@@ -57,7 +57,6 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 intent = new Intent(MainMenu.this,Navigation.class);
-                intent.putExtra("token",token);
                 startActivity(intent);
             }
         });
@@ -74,13 +73,9 @@ public class MainMenu extends AppCompatActivity {
         btn_neabyIncident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(token!=null) {
-                    intent = new Intent(MainMenu.this,NearbyMap.class);
-                    intent.putExtra("token",token);
-                    startActivity(intent);
-                }else {
-                setMessage("Please login to access this service");
-            }
+                intent = new Intent(MainMenu.this,NearbyMap.class);
+                startActivity(intent);
+
             }
         });
 
@@ -106,15 +101,9 @@ public class MainMenu extends AppCompatActivity {
         btn_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(token!=null) {
-                    intent = new Intent(MainMenu.this,ProfileActivity.class);
-                    intent.putExtra("token",token);
-                    startActivity(intent);
-                }
-                else
-                    setMessage("Please login to access this service");
-            }
-        });
+                intent = new Intent(MainMenu.this, ProfileActivity.class);
+                startActivity(intent);
+            }});
     }
 
     private void setMessage(String message) {

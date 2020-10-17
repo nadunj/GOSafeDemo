@@ -97,18 +97,12 @@ public class NearbyMap extends FragmentActivity implements OnMapReadyCallback {
         sharedPreferences = getSharedPreferences("GoSafe_settings", 0);
         radius = sharedPreferences.getInt("radius", 0);
 
+        getRealtimeIncidents();
+
     }
 
-    public void getRealtimeIncidents(View view) {
-        if (myLocation != null) {
-            if (isDataGet) {
-                mMap.clear();
-                setProgressDialog("Downloading Real-Time Data");
-                getRealtimeData();
-            }
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(myLocation.getLatitude(), myLocation.getLongitude()), 13.0f));
-        } else
-            getGPSLocation();
+    public void getRealtimeIncidents() {
+        getRealtimeData();
     }
 
     /*public void getBlackspotLocations(View view) {
@@ -205,16 +199,14 @@ public class NearbyMap extends FragmentActivity implements OnMapReadyCallback {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     RealtimeIncident incident = snapshot.getValue(RealtimeIncident.class);
                     incidentLatLng = new LatLng(incident.getLatitude(), incident.getLongitude());
-                    distance = MapController.getDistance(myLocationLatLng, incidentLatLng);
-                    if (distance <= radius) {
-                        mMap.addCircle(new CircleOptions().strokeWidth(2).radius(50).fillColor(0x2200ff00)
-                                .strokeColor(Color.TRANSPARENT).center(new LatLng(incident.getLatitude(), incident.getLongitude())));
+//                    distance = MapController.getDistance(myLocationLatLng, incidentLatLng);
+                    mMap.addCircle(new CircleOptions().strokeWidth(2).radius(50).fillColor(0x2200ff00)
+                            .strokeColor(Color.TRANSPARENT).center(new LatLng(incident.getLatitude(), incident.getLongitude())));
 
-                        mMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(incident.getLatitude(), incident.getLongitude()))
-                                .title(incident.getIncident_name())
-                                .icon(BitmapDescriptorFactory.fromResource(MapController.mapMarkerIcon(incident.getIncident_name()))));
-                    }
+                    mMap.addMarker(new MarkerOptions()
+                            .position(new LatLng(incident.getLatitude(), incident.getLongitude()))
+                            .title(incident.getIncident_name())
+                            .icon(BitmapDescriptorFactory.fromResource(MapController.mapMarkerIcon(incident.getIncident_name()))));
                 }
                 myRef.removeEventListener(this);
                 dialog.dismiss();

@@ -1,8 +1,6 @@
 package apps.njl.gosafe;
 
-/**
- * Created by Gayan Lakshitha on 4/19/2018.
- */
+
 
 public class RealtimeIncident {
     private String incident_id;

@@ -119,7 +119,7 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
 
     private ImageView img_position;
     FirebaseDatabase database;
-    DatabaseReference myRef;
+    DatabaseReference RootRef;
     private StorageReference mStorageRef;
 
     private boolean isDayStyleEnabled = true;
@@ -261,7 +261,7 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 try {
-                    myRef.child(currentIncident.getIncident_id()).removeValue();
+                    RootRef.child(currentIncident.getIncident_id()).removeValue();
                     score_removeIncident += 5;
                 } catch (Exception e) {
                 }
@@ -450,7 +450,7 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
-        myRef.addChildEventListener(new ChildEventListener() {
+        RootRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 RealtimeIncident incident = dataSnapshot.getValue(RealtimeIncident.class);
@@ -587,7 +587,7 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
 
         // Initialize Firebase-database
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference().child("RT-Incidents");
+        RootRef = database.getReference().child("RT-Incidents");
         mStorageRef = FirebaseStorage.getInstance().getReference();
 
         bearingHandler = new Handler();
@@ -833,17 +833,16 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
 
     /**set incident in current location**/
     private void setIncident(String incidentType) {
-        if(token!=null){
-            LatLng position = myLatLanLocation;
-            if (myLatLanLocation != null) {
-                String hashID = generateHashID(position.latitude, position.longitude, incidentType);
-                RealtimeIncident incident = new RealtimeIncident(hashID, incidentType, token, new Date().toString(), position.latitude, position.longitude);
 
-                captureIncidentImage(incident);
-            }
+        LatLng position = myLatLanLocation;
+        if (myLatLanLocation != null) {
+            String hashID = generateHashID(position.latitude, position.longitude, incidentType);
+            RealtimeIncident incident = new RealtimeIncident(hashID, incidentType, token, new Date().toString(), position.latitude, position.longitude);
+
+            captureIncidentImage(incident);
         }
         else
-            setMessage("Please login to access this service");
+            setMessage("Location not found");
     }
 
     private void setPopupMessage(String title, String message, int icon, boolean voiceAssist) {
@@ -1237,7 +1236,7 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
         summeryInfo.setStartTime(startTime);
         summeryInfo.setEndJourney(isEndJourney);
         String dataSet = new Gson().toJson(summeryInfo);
-        Intent intent = new Intent(MapsNavigate.this, DrivingSummery.class);
+        Intent intent = new Intent(MapsNavigate.this, MainMenu.class);
         intent.putExtra("summeryInfo", dataSet);
         startActivity(intent);
     }
@@ -1293,15 +1292,17 @@ public class MapsNavigate extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
+                incident.setUser_id(BaseApplication.user.getUsername());
                 if (currentIncident != null) {
                     if (!incident.getIncident_name().equals(currentIncident.getIncident_name())) {
-                        myRef.child(incident.getIncident_id()).setValue(incident);
+
+                        RootRef.child(incident.getIncident_id()).setValue(incident);
                         sendRTIncident(new RestRTIncident(incident.getLatitude(), incident.getLongitude(), MapController.formatDate(new Date()), incident.getIncident_name(), incident.getIncident_name()));
                         score_addIncident += 25;
                     } else
                         setMessage("This incident is already exists!");
                 } else
-                    myRef.child(incident.getIncident_id()).setValue(incident);
+                    RootRef.child(incident.getIncident_id()).setValue(incident);
 
                 if (capture_status) {
                     score_addIncident += 50;

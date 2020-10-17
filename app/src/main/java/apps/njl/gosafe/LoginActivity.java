@@ -8,6 +8,7 @@ import apps.njl.gosafe.Model.Users;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         InputUsername = (EditText) findViewById(R.id.login_username);
         InputPassword = (EditText) findViewById(R.id.login_password_input);
         loadingBar= new ProgressDialog(this);
+
 
 
         LoginButton.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +104,8 @@ public class LoginActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(LoginActivity.this, "logged in Successfully..", Toast.LENGTH_SHORT).show();
                                 loadingBar.dismiss();
+
+                                BaseApplication.user = usersData;
 
                                 Intent intent = new Intent(LoginActivity.this,MainMenu.class);
                                 startActivity(intent);

@@ -104,7 +104,6 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
     private int traffic = 0;
 
     private RESTInterface restInterface;
-    private StaticIncidentData statics_data;
     private FirebaseDatabase database;
     private DatabaseReference myRef;
     private String token;
@@ -210,7 +209,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         MapController.setCameraBounds(myPosition, destination, mMap);
         btn_gps.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.icon_navigation));
 
-        showPathInfoDialog();
+//        showPathInfoDialog();
 
         try {
             dialog.dismiss();
@@ -420,7 +419,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         polylines = new ArrayList<>();
 
         restInterface = RESTClient.getInstance().create(RESTInterface.class);
-        initSettingsData();
+
 
     }
 
@@ -434,10 +433,6 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         final TextView txt_totalDistance = view_dialog.findViewById(R.id.txt_total_distance);
         final TextView txt_totalDuration = view_dialog.findViewById(R.id.txt_total_time);
         final TextView txt_realtime_Incident = view_dialog.findViewById(R.id.txt_realtime_incidents);
-        final TextView txt_blackspots = view_dialog.findViewById(R.id.txt_blackspots);
-        final TextView txtcriticalLocation = view_dialog.findViewById(R.id.txt_criticalLocations);
-        final TextView txt_speedPoint = view_dialog.findViewById(R.id.txt_speedPoints);
-        final TextView txt_traffic = view_dialog.findViewById(R.id.txt_trafficSigns);
         TextView btn_navigate = view_dialog.findViewById(R.id.btn_route_navigate);
 
         if (failedRoute) {
@@ -448,10 +443,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
             txt_totalDuration.setText(selected_path.getDurationText());
         }
         txt_realtime_Incident.setText("" + realtime_incidents);
-        txt_blackspots.setText("" + blackspots);
-        txtcriticalLocation.setText("" + critical);
-        txt_speedPoint.setText("" + speedpoints);
-        txt_traffic.setText("" + traffic);
+
 
 
         final Intent intent = new Intent(getApplicationContext(), MapsNavigate.class);
@@ -464,21 +456,10 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
             routeInfo = new RouteInfo(myPosition, destination, selected_path.getPoints(), destination_name,
                     selected_path.getDistanceValue(), selected_path.getDurationValue());
 
-        //Static Filter
-        if (!isBlackspotEnabled)
-            statics_data.getBlackSpots().clear();
-        if (!isTrafficEnabled)
-            statics_data.getRoadSigns().clear();
-        if (!isSpeedLimitEnabled)
-            statics_data.getSpeedLimits().clear();
-        if (!isCriticalEnabled)
-            statics_data.getCriticalPoints().clear();
 
-        //Static Data Class
-        String static_data = new Gson().toJson(statics_data);
+        //Static Data Class;
         BaseApplication.routeInfo = routeInfo;
         intent.putExtra("token", token);
-        intent.putExtra("staticdata", static_data);
 
         btn_navigate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -571,6 +552,9 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
                                 realtime_incidents++;
                             }
                         }
+
+                        showPathInfoDialog();
+
                     }
                 }
 
@@ -583,11 +567,5 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         });
     }
 
-    private void initSettingsData() {
-        isBlackspotEnabled = sharedPref.getBoolean("blackspot", true);
-        isCriticalEnabled = sharedPref.getBoolean("critical", true);
-        isSpeedLimitEnabled = sharedPref.getBoolean("speed", true);
-        isTrafficEnabled = sharedPref.getBoolean("traffic", true);
-    }
 
 }
